@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import ProductCard from ".. /components/ProductCard"; // Ensure the correct file name
+import ProductCard from "../components/productcard"; 
 
 export default function App() {
 return (
