@@ -1,33 +1,75 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-const DetailsScreen = () => {
-return (
-<View style={styles.card}>
-    <Image source={require("../images/B3OFJYI196-master.webp")} style={styles.image} />
-    <Text style={styles.title}>Euriell Earring</Text>
-    <Text style={styles.description}>Elegant silver earrings with a unique design.</Text>
-    <Text style={styles.price}>27.50€</Text>
-    </View>
-);
-}
+const DetailsScreen = ({ route }) => {
+    const { title, price, description } = route.params; 
+    const [quantity, setQuantity] = useState(1);
+
+    const increaseQuantity = () => setQuantity(quantity + 1);
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    };
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.description}>{description}</Text> //added
+            <Text style={styles.price}>€{price}</Text>
+
+            <View style={styles.quantityContainer}>
+                <TouchableOpacity onPress={decreaseQuantity} style={styles.button}>
+                    <Text style={styles.buttonText}>-</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.quantityText}>{quantity}</Text>
+
+                <TouchableOpacity onPress={increaseQuantity} style={styles.button}>
+                    <Text style={styles.buttonText}>+</Text>
+                </TouchableOpacity>
+            </View>
+
+            <Text style = {styles.totalPrice}>Total: € {price * quantity}</Text>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
-container: {
-flex: 1,
-backgroundColor: "#fff",
-alignItems: "center",
-justifyContent: "center",
-paddingTop: 50,
-},
-heading: {
-fontSize: 22,
-fontWeight: "bold",
-marginBottom: 20,
-},
-scrollContainer: {
-alignItems: "center",
-},
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: 50,
+    },
+    title: {
+        fontSize: 22,
+        fontWeight: "bold",
+        marginBottom: 10,
+    },
+    price: {
+        fontSize: 18,
+        color: "#333",
+        marginBottom: 20,
+    },
+    quantityContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 20,
+    },
+    button: {
+        backgroundColor: "#007BFF",
+        padding: 10,
+        borderRadius: 5,
+        marginHorizontal: 10,
+    },
+    quantityText: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#fff",
+    },
 });
 
-export default DetailsScreen;
+export default DetailsScreen
