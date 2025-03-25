@@ -6,48 +6,48 @@ import ProductCard from "../components/ProductCard";
 const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>The Collection</Text>
+            <Text style={styles.header}>Bestsellers</Text>
 
             <ScrollView style={styles.cardContainer}>
                 <View style={styles.row}>
                     <ProductCard
-                        title="Meredith earrings"
-                        description="Earrings made with heated ruby"
-                        price="€90,-"
+                        title="Clark Necklace"
+                        description="Necklace with a music note"
+                        price="€83.99"
                         image={require("../images/B3OFJYI196-master.webp")}
                         onPress={() =>
                             navigation.navigate("Details", {
-                                title: "Meredith earrings",
-                                description: "Earrings made with heated ruby",
-                                price: "€90,-",
+                                title: "Clark Necklace",
+                                description: "Necklace with a music note",
+                                price: "€83.99",
                             })
                         }
                     />
 
                     <ProductCard
-                        title="Sapphire Necklace"
-                        description="Beautiful sapphire with silver chain"
-                        price="€120,-"
+                        title="Azalea Jonc"
+                        description="Beautiful silver chunky chain"
+                        price="€26.99"
                         image={require("../images/B3OFJYI196-master.webp")}
                         onPress={() =>
                             navigation.navigate("Details", {
-                                title: "Sapphire Necklace",
-                                description: "Beautiful sapphire with silver chain",
-                                price: "€120,-",
+                                title: "Azalea Jonc",
+                                description: "Beautiful silver chunky chain",
+                                price: "€26.99",
                             })
                         }
                     />
 
                     <ProductCard
-                        title="Emerald Ring"
-                        description="Emerald stone set in a golden band"
-                        price="€150,-"
+                        title="Veda Dangles"
+                        description="Earring with a mix of yellow gold,pink gold and silver"
+                        price="€63.60"
                         image={require("../images/B3OFJYI196-master.webp")}
                         onPress={() =>
                             navigation.navigate("Details", {
-                                title: "Emerald Ring",
-                                description: "Emerald stone set in a golden band",
-                                price: "€150,-",
+                                title: "Veda Dangles",
+                                description: "Earring with a mix of yellow gold,pink gold and silver",
+                                price: "€€63.60",
                             })
                         }
                     />
