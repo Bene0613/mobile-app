@@ -1,56 +1,54 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import ProductCard from "../components/ProductCard";
 
 const HomeScreen = ({ navigation }) => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch(
+            "https://api.webflow.com/v2/sites/67b35e97083c8e78cc4ddc10/products67e2e16589324a679c942716",
+            {
+                headers: {
+                    Authorization:
+                    "Bearer 9debb61cb18209d3f319f766bcdd05e4ef09ee0f2308e84797c3a2476eeabea4",
+                },
+            }
+        )
+        .then((res) =>res.json())
+        .then((data) =>
+            setProducts(
+                data.item.map((item) => ({
+                    id: item.product.id,
+                    title: item.product.fieldData.name,
+                    subtitle: item.product.fieldData.description,
+                    price: (item.skus[0]?.fieldData.price.value || 0) / 100,
+                    image: { uri: item.skus[0]?.fieldData["main-image"]?.url },
+                }))
+            )
+        )
+        .catch((err) => console.error("Error:", err));
+    }, []);
+
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Bestsellers</Text>
 
             <ScrollView style={styles.cardContainer}>
                 <View style={styles.row}>
-                    <ProductCard
-                        title="Clark Necklace"
-                        description="Necklace with a music note"
-                        price="€83.99"
-                        image={require("../images/wfimg3.webp")}
+                    {products.map((product) =>(
+                      <ProductCard
+                        key={product.id}
+                        title={product.title}
+                        description={product.subtitle}
+                        price={product.price}
+                        image={product.image}
                         onPress={() =>
-                            navigation.navigate("Details", {
-                                title: "Clark Necklace",
-                                description: "Necklace with a music note",
-                                price: "€83.99",
-                            })
-                        }
-                    />
-
-                    <ProductCard
-                        title="Azalea Jonc"
-                        description="Beautiful silver chunky chain"
-                        price="€26.99"
-                        image={require("../images/jonc1.webp")}
-                        onPress={() =>
-                            navigation.navigate("Details", {
-                                title: "Azalea Jonc",
-                                description: "Beautiful silver chunky chain",
-                                price: "€26.99",
-                            })
-                        }
-                    />
-
-                    <ProductCard
-                        title="Veda Dangles"
-                        description="Earring with a mix of yellow gold,pink gold and silver"
-                        price="€63.60"
-                        image={require("../images/wfimg4.webp")}
-                        onPress={() =>
-                            navigation.navigate("Details", {
-                                title: "Veda Dangles",
-                                description: "Earring with a mix of yellow gold,pink gold and silver",
-                                price: "€€63.60",
-                            })
-                        }
-                    />
+                            navigation.navigate("Details", product)}
+                    />  
+                    ))}
+                    
                 </View>
             </ScrollView>
             
