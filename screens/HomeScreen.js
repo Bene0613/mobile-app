@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
                         title="Clark Necklace"
                         description="Necklace with a music note"
                         price="€83.99"
-                        image={require("../images/B3OFJYI196-master.webp")}
+                        image={require("../images/wfimg3.webp")}
                         onPress={() =>
                             navigation.navigate("Details", {
                                 title: "Clark Necklace",
@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
                         title="Azalea Jonc"
                         description="Beautiful silver chunky chain"
                         price="€26.99"
-                        image={require("../images/B3OFJYI196-master.webp")}
+                        image={require("../images/jonc1.webp")}
                         onPress={() =>
                             navigation.navigate("Details", {
                                 title: "Azalea Jonc",
@@ -42,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
                         title="Veda Dangles"
                         description="Earring with a mix of yellow gold,pink gold and silver"
                         price="€63.60"
-                        image={require("../images/B3OFJYI196-master.webp")}
+                        image={require("../images/wfimg4.webp")}
                         onPress={() =>
                             navigation.navigate("Details", {
                                 title: "Veda Dangles",
