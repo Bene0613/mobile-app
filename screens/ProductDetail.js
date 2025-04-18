@@ -15,7 +15,7 @@ const DetailsScreen = ({ route }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.description}>{description}</Text> //added
+            <Text style={styles.description}>{description}</Text> 
             <Text style={styles.price}>€{price}</Text>
 
             <View style={styles.quantityContainer}>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     button: {
-        backgroundColor: "#007BFF",
+        backgroundColor: "#e8b89e",
         padding: 10,
         borderRadius: 5,
         marginHorizontal: 10,
@@ -70,6 +70,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#fff",
     },
+    description: {
+        fontSize: 16,
+        color: "#666",
+        textAlign: "center",
+        marginBottom: 10,
+        paddingHorizontal: 20,
+    },
 });
 
-export default DetailsScreen
+export default DetailsScreen;

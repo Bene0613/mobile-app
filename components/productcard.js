@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
         elevation: 3,
         alignItems: "center",
-        width: "90%",  // Make cards responsive
+        width: "90%",  
         alignSelf: "center",
     },
     image: {
         width: "100%",
         height: 200,
         borderRadius: 10,
-        resizeMode: "cover",  // Ensure proper image scaling
+        resizeMode: "cover",  
     },
     title: {
         fontSize: 18,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     button: {
-        backgroundColor: "#007BFF",
+        backgroundColor: "#e8b89e",
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
