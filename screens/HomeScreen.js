@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ScrollView, TextInput } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity  } from "react-native";
 import ProductCard from "../components/ProductCard.js";
 import { Picker } from "@react-native-picker/picker";
+import { useNavigation } from "@react-navigation/native";
 
 const categoryNames = {
   "": "All categories",
@@ -12,7 +13,8 @@ const categoryNames = {
   "67e2d80d8e71acb806ae63a0": "Earrings",
 };
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
+  const navigation = useNavigation();
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
           data.items.map((item) => ({
             id: item.product.id,
             title: item.product.fieldData.name,
-            subtitle: item.product.fieldData.description,
+            description: item.product.fieldData.description,
             price: (item.skus[0]?.fieldData.price.value || 0) / 100,
             image: { uri: item.skus[0]?.fieldData["main-image"]?.url },
             category:
@@ -45,7 +47,6 @@ const HomeScreen = ({ navigation }) => {
       .catch((err) => console.error("Error:", err));
   }, []);
 
-  // Filter and sort products in one step
   const filteredAndSortedProducts = [...products]
     .filter(
       (p) =>
@@ -100,20 +101,43 @@ const HomeScreen = ({ navigation }) => {
 
       <ScrollView style={styles.cardContainer}>
         <View style={styles.row}>
-          {filteredAndSortedProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              description={product.subtitle}
-              price={product.price}
-              image={product.image}
-              onPress={() => navigation.navigate("Details", product)}
-            />
-          ))}
+          {filteredAndSortedProducts.length > 0 ? (
+            filteredAndSortedProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                title={product.title}
+                description={product.subtitle}
+                price={product.price}
+                image={product.image}
+                onPress={() => navigation.navigate("Details", { product })}
+              />
+            ))
+          ) : (
+            <Text>No products found</Text>
+          )}
+          
         </View>
       </ScrollView>
 
+      <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.customButton} onPress={() => navigation.navigate("AboutUs")}>
+          <Text style={styles.buttonText}>About us</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.customButton} onPress={() => navigation.navigate("Blog")}>
+          <Text style={styles.buttonText}>Our Blogs</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.customButton} onPress={() => navigation.navigate("Profile")}>
+          <Text style={styles.buttonText}>My Profile</Text>
+        </TouchableOpacity>
+
+      </View>
+
+
+            
       <StatusBar style="auto" />
+
     </View>
   );
 };
@@ -129,6 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+     fontFamily: "charm-regular",
   },
   searchInput: {
     width: "90%",
@@ -164,6 +189,29 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     paddingHorizontal: 10,
   },
+
+  buttonRow: {
+  flexDirection: "row",
+  justifyContent: "space-around",
+  marginTop: 20,
+  flexWrap: "wrap",
+},
+
+customButton: {
+  backgroundColor: "#e8b89e",
+  paddingVertical: 10,
+  paddingHorizontal: 15,
+  borderRadius: 8,
+  margin: 5,
+},
+
+buttonText: {
+  color: "#fff",
+  fontWeight: "bold",
+  textAlign: "center",
+   fontFamily: "charm-regular",
+},
+
 });
 
 export default HomeScreen;
